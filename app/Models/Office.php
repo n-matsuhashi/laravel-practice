@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  * class Office
  * @mixin Eloquent
  * @package App\Models
+ * @function static findOrFail(int $id)
+ * @method static findorFail(int $id)
  */
 class Office extends Model
 {

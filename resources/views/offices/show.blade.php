@@ -25,5 +25,5 @@
         </tr>
     </table>
     <br />
-    <a href="{{ route('offices.index', $office) }}">オフィス一覧</a>
+    <a href="{{ route('offices.index') }}">オフィス一覧</a>
 @endsection
