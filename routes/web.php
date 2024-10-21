@@ -22,4 +22,5 @@ Route::get('/hello', 'App\Http\Controllers\HelloController@index');
 Route::prefix('offices')->name('offices.')->group(function () {
     Route::get('/', 'App\Http\Controllers\OfficesController@index')->name('index');
     Route::get('/{id}', 'App\Http\Controllers\OfficesController@show')->name('show');
+    Route::get('/create', 'App\Http\Controllers\OfficesController@create')->name('create');
 });
