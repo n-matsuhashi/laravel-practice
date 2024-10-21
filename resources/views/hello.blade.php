@@ -11,6 +11,6 @@
     </head>
     <body>
         <div>Hello World!!</div>
-        <div>item =  {{ $item  }}</div>
+        <div>viewItem =  {{ $viewItem  }}</div>
     </body>
 </html>

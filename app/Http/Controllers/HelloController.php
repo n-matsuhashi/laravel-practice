@@ -8,8 +8,8 @@ class HelloController extends Controller
 {
     public function index(): View
     {
-        $item = "りんご";
+        $controllerItem = "hogehoge";
 
-        return view('hello', ['item' => $item]);
+        return view('hello', ['viewItem' => $controllerItem]);
     }
 }
