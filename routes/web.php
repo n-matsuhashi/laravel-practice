@@ -18,3 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', 'App\Http\Controllers\HelloController@index');
+
+Route::group(['prefix' => 'offices', 'as' => 'offices.'], function () {
+    Route::get('/', 'App\Http\Controllers\OfficesController@index')->name('index');
+    Route::get('/{id}', 'App\Http\Controllers\OfficesController@show')->name('show');
+});
