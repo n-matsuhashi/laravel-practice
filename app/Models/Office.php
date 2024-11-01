@@ -16,4 +16,22 @@ use Illuminate\Database\Eloquent\Model;
 class Office extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'address',
+        'post_code',
+        'stair',
+        'comment',
+    ];
+
+    /**
+     * オフィスの登録処理
+     * @param array<string, string|int> $inputData
+     * @return void
+     */
+    public function registerOffice(array $inputData): void
+    {
+        (new self)->fill($inputData)->save();
+    }
 }
