@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CustomSoftDelete;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 class Office extends Model
 {
     use HasFactory;
+    use CustomSoftDelete;
 
     protected $fillable = [
         'name',
@@ -33,7 +35,7 @@ class Office extends Model
      */
     public function registerOffice(array $inputData): void
     {
-        (new self)->fill($inputData)->save();
+        $this->fill($inputData)->save();
     }
 
     /**

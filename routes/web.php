@@ -26,4 +26,5 @@ Route::prefix('offices')->name('offices.')->group(function () {
     Route::get('/{id}/edit', 'App\Http\Controllers\OfficesController@edit')->name('edit');
     Route::get('/{id}', 'App\Http\Controllers\OfficesController@show')->name('show');
     Route::put('/{id}', 'App\Http\Controllers\OfficesController@update')->name('update');
+    Route::delete('/{id}', 'App\Http\Controllers\OfficesController@destroy')->name('destroy');
 });
