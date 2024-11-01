@@ -25,5 +25,6 @@
         </tr>
     </table>
     <br />
+    <a href="{{ route('offices.edit', $office) }}">編集</a>
     <a href="{{ route('offices.index') }}">オフィス一覧</a>
 @endsection

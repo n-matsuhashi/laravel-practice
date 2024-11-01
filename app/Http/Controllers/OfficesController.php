@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfficeStoreRequest;
+use App\Http\Requests\OfficeUpdateRequest;
 use App\Models\Office;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 
 class OfficesController extends Controller
@@ -20,7 +20,7 @@ class OfficesController extends Controller
     public function index()
     {
         $offices = Office::all();
-        return view('offices.index', ['offices' => $offices]);
+        return view('offices.index', compact('offices'));
     }
 
     /**
@@ -31,7 +31,7 @@ class OfficesController extends Controller
     public function show(int $id)
     {
         $office = Office::findorFail($id);
-        return view('offices.show', ['office' => $office]);
+        return view('offices.show', compact('office'));
     }
 
     /**
@@ -44,32 +44,59 @@ class OfficesController extends Controller
     }
 
     /**
-     * 物件登録処理(ajax)
-     * @param OfficeStoreRequest $request
-     * @return  JsonResponse
+     * 物件編集
+     * @param int $id
+     * @return Application|Factory|View
      */
-    public function store(OfficeStoreRequest $request)
+    public function edit(int $id)
     {
-        (new Office)->registerOffice(
-            $request->only('name', 'address', 'post_code', 'stair', 'comment')
-        );
-
-        return response()->json(['message' => '登録しました']);
+        $office = Office::findorFail($id);
+        return view('offices.edit', compact('office'));
     }
 
 //    /**
-//     * 物件登録処理
+//     * 物件登録処理(ajax)
 //     * @param OfficeStoreRequest $request
-//     * @return RedirectResponse
+//     * @return  JsonResponse
 //     */
-//    public function store(OfficeStoreRequest $request): RedirectResponse
+//    public function store(OfficeStoreRequest $request)
 //    {
-//
-//        (new office())->registerOffice(
+//        (new Office)->registerOffice(
 //            $request->only('name', 'address', 'post_code', 'stair', 'comment')
 //        );
 //
-//        return redirect()->route('offices.index');
+//        return response()->json(['message' => '登録しました']);
 //    }
+
+    /**
+     * 物件登録処理
+     * @param OfficeStoreRequest $request
+     * @return RedirectResponse
+     */
+    public function store(OfficeStoreRequest $request): RedirectResponse
+    {
+
+        (new office())->registerOffice(
+            $request->only('name', 'address', 'post_code', 'stair', 'comment')
+        );
+
+        return redirect()->route('offices.index');
+    }
+
+    /**
+     * 物件更新処理
+     * @param OfficeUpdateRequest $request
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function update(OfficeUpdateRequest $request, int $id): RedirectResponse
+    {
+        Office::updateOffice(
+            $id,
+            $request->only('name', 'address', 'post_code', 'stair', 'comment')
+        );
+
+        return redirect()->route('offices.index');
+    }
 
 }

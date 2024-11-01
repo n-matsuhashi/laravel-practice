@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * class Office
@@ -33,5 +34,19 @@ class Office extends Model
     public function registerOffice(array $inputData): void
     {
         (new self)->fill($inputData)->save();
+    }
+
+    /**
+     * オフィスの更新処理
+     * @param int $id
+     * @param array<string, string|int> $inputData
+     * @return void
+     */
+    public static function updateOffice(int $id, array $inputData): void
+    {
+        // 必要ない?
+        DB::transaction(function () use ($id, $inputData) {
+            Office::findorFail($id)->fill($inputData)->save();
+        });
     }
 }
