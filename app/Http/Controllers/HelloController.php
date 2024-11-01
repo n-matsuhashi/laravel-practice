@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class HelloController extends Controller
 {
-    public function index(): View
+    /**
+     * @return Application|Factory|View
+     */
+    public function index()
     {
         $controllerItem = "hogehoge";
 
