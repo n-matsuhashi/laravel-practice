@@ -99,4 +99,16 @@ class OfficesController extends Controller
         return redirect()->route('offices.index');
     }
 
+    /**
+     * 物件削除処理
+     * @param int $id
+     * @return RedirectResponse
+     */
+    public function destroy(int $id): RedirectResponse
+    {
+        Office::findorFail($id)->delete();
+
+        return redirect()->route('offices.index');
+    }
+
 }
