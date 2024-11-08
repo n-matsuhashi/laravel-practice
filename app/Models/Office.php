@@ -6,6 +6,7 @@ use App\Traits\CustomSoftDelete;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -27,6 +28,16 @@ class Office extends Model
         'stair',
         'comment',
     ];
+
+    /**
+     * メモテーブルとのリレーション
+     * @return HasMany
+     */
+    public function memos(): HasMany
+    {
+        return $this->hasMany(Memo::class);
+    }
+
 
     /**
      * オフィスの登録処理
