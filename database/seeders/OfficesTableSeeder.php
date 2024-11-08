@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Memo;
+use App\Models\Office;
 use Illuminate\Database\Seeder;
 
 class OfficesTableSeeder extends Seeder
@@ -30,6 +32,8 @@ class OfficesTableSeeder extends Seeder
 //            ]
 //        ]);
 
-        \App\Models\Office::factory()->count(10)->create();
+        Office::factory()->count(10)
+            ->has(Memo::factory()->count(10))
+            ->create();
     }
 }

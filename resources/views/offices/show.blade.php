@@ -23,6 +23,12 @@
             <th>コメント</th>
             <td>{{ $office->comment }}</td>
         </tr>
+        <tr>
+            <th>メモ</th>
+            @foreach($office->memos as $memo)
+                <td>{{ $memo->content }}</td>
+            @endforeach
+        </tr>
     </table>
     <br />
     <form action="{{ route('offices.destroy', $office) }}" method="post">
