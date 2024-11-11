@@ -33,7 +33,7 @@ class OfficesTableSeeder extends Seeder
 //        ]);
 
         Office::factory()->count(10)
-            ->has(Memo::factory()->count(10))
+            ->has(Memo::factory()->count(3))
             ->create();
     }
 }

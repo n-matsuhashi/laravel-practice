@@ -15,6 +15,9 @@
 
 <body>
     <main>
+        <header>
+            @include('layouts.components.navigation')
+        </header>
         @yield('content')
     </main>
 </body>
