@@ -4,17 +4,17 @@ namespace App\Models;
 
 use App\Traits\CustomSoftDelete;
 use Eloquent;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\ValidatedInput;
 
 /**
  * class Office
  * @mixin Eloquent
  * @package App\Models
- * @function static findOrFail(int $id)
- * @method static findorFail(int $id)
  */
 class Office extends Model
 {
@@ -41,25 +41,27 @@ class Office extends Model
 
     /**
      * オフィスの登録処理
-     * @param array<string, string|int> $inputData
+     * @param array<string, string|int>|ValidatedInput $inputData
      * @return void
      */
-    public function registerOffice(array $inputData): void
+    public static function registerOffice($inputData):void
     {
-        $this->fill($inputData)->save();
+        self::create($inputData instanceOf ValidatedInput ? $inputData->toArray() : $inputData);
     }
 
     /**
      * オフィスの更新処理
-     * @param int $id
-     * @param array<string, string|int> $inputData
+     * @param Office $office
+     * @param array<string, string|int>|ValidatedInput $inputData
      * @return void
      */
-    public static function updateOffice(int $id, array $inputData): void
+    public static function updateOffice(Office $office, $inputData): void
     {
         // 必要ない?
-        DB::transaction(function () use ($id, $inputData) {
-            Office::findorFail($id)->fill($inputData)->save();
+        DB::transaction(function () use ($office, $inputData) {
+            $office->fill(
+                $inputData instanceOf ValidatedInput ? $inputData->toArray() : $inputData
+            )->save();
         });
     }
 }

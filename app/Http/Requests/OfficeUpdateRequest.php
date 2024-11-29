@@ -9,23 +9,13 @@ use Illuminate\Validation\Rules\Unique;
 class OfficeUpdateRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, array<int, string|Unique>>
      */
     public function rules(): array
     {
-        $officeId = $this->route('id');
+        $office = $this->route('office');
 
         return [
             'name' => [
@@ -37,7 +27,7 @@ class OfficeUpdateRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('offices')->ignore($officeId),
+                Rule::unique('offices')->ignore($office),
             ],
             'post_code' => [
                 'required',
