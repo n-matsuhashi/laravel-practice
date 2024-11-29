@@ -1,9 +1,5 @@
 @extends('layouts.app')
 @section('title', 'create office')
-@push('js')
-    {{-- ajaxで使う --}}
-    <script src="{{ mix('js/pages/offices/create.js') }}"></script>
-@endpush
 
 @section('content')
     <h1>オフィス新規登録</h1>
@@ -42,3 +38,6 @@
 {{--    </form>--}}
 {{--@endsection--}}
 @endsection
+
+# ajaxで使う
+<script src="{{ mix('js/pages/offices/create.js') }}"></script>

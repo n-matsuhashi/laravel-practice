@@ -15,7 +15,7 @@ class OfficesController extends Controller
 {
     /**
      * 物件一覧
-     * @return Application|Factory|View
+     * @return Factory|View
      */
     public function index()
     {
@@ -25,18 +25,17 @@ class OfficesController extends Controller
 
     /**
      * 物件詳細
-     * @param int $id
+     * @param Office $office
      * @return Application|Factory|View
      */
-    public function show(int $id)
+    public function show(Office $office)
     {
-        $office = Office::findorFail($id);
         return view('offices.show', compact('office'));
     }
 
     /**
      * 物件登録
-     * @return Application|Factory|View
+     * @return Factory|View
      */
     public function create()
     {
@@ -45,12 +44,11 @@ class OfficesController extends Controller
 
     /**
      * 物件編集
-     * @param int $id
-     * @return Application|Factory|View
+     * @param Office $office
+     * @return Factory|View
      */
-    public function edit(int $id)
+    public function edit(Office $office)
     {
-        $office = Office::findorFail($id);
         return view('offices.edit', compact('office'));
     }
 
@@ -76,8 +74,8 @@ class OfficesController extends Controller
     public function store(OfficeStoreRequest $request): RedirectResponse
     {
 
-        (new office())->registerOffice(
-            $request->only('name', 'address', 'post_code', 'stair', 'comment')
+        Office::registerOffice(
+            $request->safe(['name', 'address', 'post_code', 'stair', 'comment'])
         );
 
         return redirect()->route('offices.index');
@@ -86,14 +84,14 @@ class OfficesController extends Controller
     /**
      * 物件更新処理
      * @param OfficeUpdateRequest $request
-     * @param int $id
+     * @param Office $office
      * @return RedirectResponse
      */
-    public function update(OfficeUpdateRequest $request, int $id): RedirectResponse
+    public function update(OfficeUpdateRequest $request, Office $office): RedirectResponse
     {
         Office::updateOffice(
-            $id,
-            $request->only('name', 'address', 'post_code', 'stair', 'comment')
+            $office,
+            $request->safe(['name', 'address', 'post_code', 'stair', 'comment'])
         );
 
         return redirect()->route('offices.index');
@@ -101,13 +99,12 @@ class OfficesController extends Controller
 
     /**
      * 物件削除処理
-     * @param int $id
+     * @param Office $office
      * @return RedirectResponse
      */
-    public function destroy(int $id): RedirectResponse
+    public function destroy(Office $office): RedirectResponse
     {
-        Office::findorFail($id)->delete();
-
+        $office->delete();
         return redirect()->route('offices.index');
     }
 

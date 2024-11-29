@@ -23,10 +23,10 @@ Route::prefix('offices')->name('offices.')->group(function () {
     Route::get('/', 'App\Http\Controllers\OfficesController@index')->name('index');
     Route::post('/', 'App\Http\Controllers\OfficesController@store')->name('store');
     Route::get('/create', 'App\Http\Controllers\OfficesController@create')->name('create');
-    Route::get('/{id}/edit', 'App\Http\Controllers\OfficesController@edit')->name('edit');
-    Route::get('/{id}', 'App\Http\Controllers\OfficesController@show')->name('show');
-    Route::put('/{id}', 'App\Http\Controllers\OfficesController@update')->name('update');
-    Route::delete('/{id}', 'App\Http\Controllers\OfficesController@destroy')->name('destroy');
+    Route::get('/{office}/edit', 'App\Http\Controllers\OfficesController@edit')->name('edit');
+    Route::get('/{office}', 'App\Http\Controllers\OfficesController@show')->name('show');
+    Route::put('/{office}', 'App\Http\Controllers\OfficesController@update')->name('update');
+    Route::delete('/{office}', 'App\Http\Controllers\OfficesController@destroy')->name('destroy');
 });
 
 // 認証用のルート

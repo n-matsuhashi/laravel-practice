@@ -33,8 +33,7 @@ function insertErrorMessage(data) {
     // エラーメッセージがない場合処理を抜ける
     if (errors === null) {
         errorField.html('エラーが発生しました');
-        return
-            ;
+        return;
     }
 
     // エラーのリスト要素を構築
