@@ -41,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * 入力された認証情報が正しいかどうかを判定
+     * @param array<string, string> $credentials
+     * @return bool
+     */
+    public static function isCredentialsValid(array $credentials): bool {
+        // メールアドレスが一致するユーザーを取得
+        $match_user = User::where('email', $credentials['email'])->first() ?? null;
+        // パスワードの検証
+        if ($match_user && password_verify($credentials['password'], $match_user->password)) {
+            return true;
+        }
+        return false;
+    }
+
 }
