@@ -7,10 +7,11 @@
 
 @section('content')
     <h1>オフィス新規登録</h1>
-    @include('offices.components.form', ['office' => null,
-                                         'action' => route('offices.store'),
-                                         'isUpdate' => false
-                                        ])
+    @include('offices.components.form', [
+        'office' => null,
+        'action' => route('offices.store'),
+        'isUpdate' => false
+    ])
 {{--    ajaxで使う --}}
 {{--    <ul data-error-message></ul>--}}
 {{--    <form data-office-create>--}}

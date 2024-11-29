@@ -28,12 +28,13 @@ $(document).on("submit", "[data-office-create]", function(e) {
 function insertErrorMessage(data) {
 
     const errorField = $('[data-error-message]');
-    const errors = data.responseJSON.errors ?? null;
+    const errors = 'responseJSON' in data && data.responseJSON.errors ?? null;
 
     // エラーメッセージがない場合処理を抜ける
     if (errors === null) {
         errorField.html('エラーが発生しました');
-        return;
+        return
+            ;
     }
 
     // エラーのリスト要素を構築
