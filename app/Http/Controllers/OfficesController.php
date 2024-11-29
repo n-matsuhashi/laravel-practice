@@ -19,7 +19,7 @@ class OfficesController extends Controller
      */
     public function index()
     {
-        $offices = Office::all();
+        $offices = Office::with('memos')->get();
         return view('offices.index', compact('offices'));
     }
 
