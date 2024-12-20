@@ -28,8 +28,3 @@ Route::prefix('offices')->name('offices.')->group(function () {
     Route::put('/{office}', 'App\Http\Controllers\OfficesController@update')->name('update');
     Route::delete('/{office}', 'App\Http\Controllers\OfficesController@destroy')->name('destroy');
 });
-
-// 認証用のルート
-Route::get('/login', 'App\Http\Controllers\AuthController@showLoginForm')->name('login');
-Route::post('/login', 'App\Http\Controllers\AuthController@login')->name('login.process');
-Route::post('/logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
